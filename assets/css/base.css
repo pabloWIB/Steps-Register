@@ -1,0 +1,172 @@
+/* ==========================================================================
+   base.css — design tokens, reset, typography, utilities
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   Design tokens
+   Palette derived from the colours the project already used. The canvas
+   colour and the purple glow are the two values sampled out of the original
+   background bitmap, which this stylesheet now reproduces as gradients.
+   -------------------------------------------------------------------------- */
+
+:root {
+  /* Surfaces */
+  --color-canvas: #121826;
+  --color-surface: #212936;
+  --color-surface-raised: #394150;
+  --color-border: #4e586a;
+  --color-border-field: #4d5562;
+
+  /* Brand */
+  --color-accent: #845eee;
+  --color-accent-strong: #652cd1;
+  --color-accent-soft: #7a52e4;
+  --color-glow: 101 44 209;
+
+  /* Text — every value below clears 4.5:1 on the surface it is used on */
+  --color-text: #e5e7eb;
+  --color-text-soft: #c3c4ca;
+  --color-text-muted: #a1a1a9;
+  --color-text-dim: #8a92a6;
+  --color-link: #a78bfa;
+  --color-danger: #f87171;
+
+  /* Spacing scale */
+  --space-4: 0.25rem;
+  --space-8: 0.5rem;
+  --space-16: 1rem;
+  --space-24: 1.5rem;
+  --space-32: 2rem;
+  --space-48: 3rem;
+
+  /* Radii */
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-pill: 999px;
+
+  /* Typography */
+  --font-sans: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.25rem;
+  --leading-tight: 1.25;
+  --leading-normal: 1.6;
+
+  /* Motion */
+  --transition: 180ms ease;
+}
+
+/* --------------------------------------------------------------------------
+   Reset
+   -------------------------------------------------------------------------- */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+img,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+input,
+button {
+  font: inherit;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+ul,
+ol {
+  padding: 0;
+  list-style: none;
+}
+
+dd {
+  margin: 0;
+}
+
+/* --------------------------------------------------------------------------
+   Base typography
+   -------------------------------------------------------------------------- */
+
+body {
+  color: var(--color-text);
+  font-family: var(--font-sans);
+  font-size: var(--text-base);
+  line-height: var(--leading-normal);
+}
+
+h1,
+h2 {
+  font-size: var(--text-lg);
+  font-weight: 600;
+  line-height: var(--leading-tight);
+}
+
+a {
+  color: var(--color-link);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+  transition: color var(--transition);
+}
+
+a:hover {
+  color: var(--color-text);
+}
+
+/* --------------------------------------------------------------------------
+   Focus
+   Every interactive element keeps a visible ring. The original stylesheet
+   removed it with `all: unset` and never put one back.
+   -------------------------------------------------------------------------- */
+
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+/* --------------------------------------------------------------------------
+   Utilities
+   -------------------------------------------------------------------------- */
+
+/* Hidden visually, still reachable by keyboard and screen readers. */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* --------------------------------------------------------------------------
+   Motion preferences
+   -------------------------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

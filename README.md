@@ -1,241 +1,108 @@
-![image](https://github.com/pabloDYEL/ESTATICA-44/assets/116923433/28d9931a-6b57-44e8-b088-2cb364e21db0)
+# Steps-Register
 
-# Steps Register
+Three-step registration form that ends on a summary of what the user entered.
 
-A modern, multi-step registration form built with pure HTML, CSS, and vanilla JavaScript. This project provides a clean, intuitive user registration experience with step-by-step progression and form validation.
+[![Hire me on Fiverr](https://img.shields.io/badge/Hire%20me%20on-Fiverr-1DBF73?style=for-the-badge&logo=fiverr&logoColor=white)](https://www.fiverr.com/pablonietop)
 
-## Overview
+[![Live demo](https://img.shields.io/badge/demo-stepsregister.wib.digital-2ea44f)](https://stepsregister.wib.digital)
+![Dependencies](https://img.shields.io/badge/npm%20dependencies-0-brightgreen)
+![Build step](https://img.shields.io/badge/build%20step-none-lightgrey)
 
-Steps Register is a static website featuring a multi-step registration process designed to improve user experience by breaking complex forms into manageable steps. The interface includes progress indicators, smooth transitions, and comprehensive form validation.
+## Description
 
-## Tech Stack
+Registration forms ask for two different kinds of thing — who you are, and what you want — and mixing them on one screen makes both harder to answer. This one separates them: name and email first, topic interests second, and a summary third.
 
-- **Frontend**: HTML5, CSS3, Vanilla JavaScript
-- **No Dependencies**: Pure static implementation
-- **No Server Required**: Client-side only
-- **Multi-Step Logic**: JavaScript-powered step navigation
-- **Form Validation**: Real-time input validation
-- **Responsive Design**: Mobile-first approach
-- **Modern CSS**: Flexbox, CSS Variables, Smooth Animations
+The summary is the point of the pattern. Before anything is submitted, the user sees their own name, email and selected topics written back to them, which is the cheapest way to catch a mistyped address.
+
+There is no backend. Nothing is sent and nothing is stored — the summary is assembled from the form's own state, and the final screen says so rather than pretending a registration went through.
 
 ## Features
 
-- Multi-step registration form with progress tracking
-- Step-by-step navigation with "Continue" functionality
-- Real-time form validation with user feedback
-- Progress indicator showing current step (Step 1 of 3)
-- Smooth animations and transitions between steps
-- Responsive design optimized for all devices
-- Clean, modern dark theme UI
-- Accessible form elements with proper labeling
-- Form data persistence across steps
+- Three steps: personal details, topic interests, summary — plus a completion screen.
+- Summary echoes name, email and selected topics before submission.
+- Topic selection by checkbox, with any number selectable.
+- Inline validation with specific messages; focus moves to the first field that needs fixing.
+- Back navigation between steps, with entered values kept.
+- Fully operable by keyboard, with a visible focus ring on every control.
+- Respects `prefers-reduced-motion`.
+- No npm dependencies and no build step.
 
-## Project Structure
+## Tech stack
+
+| Layer | Technology | Role in project |
+|---|---|---|
+| Markup | HTML5 | Single `index.html` holding all four screens, plus `404.html` |
+| Styling | CSS3 | Custom properties for the design tokens; three files, no preprocessor |
+| Scripting | JavaScript | ~315 lines in `assets/js/main.js`, no dependencies |
+| Typography | Inter, from Google Fonts | Weights 400 and 600 |
+
+## Prerequisites
+
+None. Open `index.html` in any browser.
+
+## Installation
+
+```bash
+git clone https://github.com/pabloWIB/Steps-Register.git
+cd Steps-Register
+```
+
+Open `index.html` directly, or serve the folder over HTTP:
+
+```bash
+python -m http.server 4321
+```
+
+## Usage
+
+All four screens are in the document from the start; the script shows one at a time and keeps the progress indicator in step. Values entered earlier survive going back, so the summary always reflects the current state of the fields.
+
+To send the registration somewhere, hook into the confirm button in `assets/js/main.js` and post the values collected there — the form currently prevents its default and goes no further by design.
+
+## Project structure
 
 ```
-steps-register/
-├── index.html              # Main registration page
-├── css/
-│   ├── main.css           # Main stylesheet
-│   ├── form.css           # Form and step styles
-│   ├── animations.css     # Transition animations
-│   └── responsive.css     # Media queries
-├── js/
-│   ├── main.js           # Main JavaScript functionality
-│   ├── step-manager.js   # Step navigation logic
-│   ├── form-validation.js # Form validation rules
-│   └── data-handler.js   # Form data management
-├── pages/
-│   ├── step-2.html       # Second step (if using separate pages)
-│   ├── step-3.html       # Third step (if using separate pages)
-│   └── success.html      # Registration success page
+.
+├── index.html                    # All four screens: 3 steps + completion
+├── 404.html                      # Not-found page, links back to the form
+├── robots.txt
+├── sitemap.xml
 ├── assets/
-│   ├── icons/           # UI icons and graphics
-│   └── images/         # Background images
-└── README.md
+│   ├── css/
+│   │   ├── base.css              # Design tokens, reset, typography, utilities
+│   │   ├── layout.css            # Page shell, card, steps, progress, footer
+│   │   └── components.css        # Buttons, fields, options, summary
+│   ├── js/
+│   │   └── main.js               # Step navigation, validation, summary
+│   └── img/
+│       ├── favicon.png           # 180×180
+│       └── steps-register-preview.jpg   # 1200×630 Open Graph image
+└── docs/
+    ├── auditoria.md              # State of the project before the cleanup
+    └── cambios.md                # What changed, grouped by area
 ```
 
-## Quick Start
+## Known issues
 
-### Prerequisites
-
-- Modern web browser
-- Text editor or IDE
-- Basic knowledge of HTML, CSS, and JavaScript
-
-### Local Development
-
-1. **Clone the repository**
-   ```bash
-   git clone https://github.com/pabloWIB/Steps-Register.git
-   cd Steps-Register
-   ```
-
-2. **Open in browser**
-   ```bash
-   # Simply open index.html in your preferred browser
-   # Or use a local development server
-   
-   # Using Node.js live-server (if available)
-   npx live-server
-   
-   # Using PHP built-in server (if available)
-   php -S localhost:8000
-   
-   # Or just double-click index.html
-   ```
-
-3. **Start developing**
-   - Edit HTML files for form structure and content
-   - Modify CSS files for styling and animations
-   - Update JavaScript files for step logic and validation
-   - Customize form fields and validation rules
+None outstanding. The two problems listed in the previous revision of this file — the step counter and the sample values baked into the summary markup — are fixed; `docs/cambios.md` records the details.
 
 ## Deployment
 
-### Static Hosting Options
+Deployed on Vercel at [stepsregister.wib.digital](https://stepsregister.wib.digital). Static: upload the repository root as-is, no build command and no output directory.
 
-**GitHub Pages**
-1. Push code to GitHub repository
-2. Go to repository Settings > Pages
-3. Select source branch (usually `main`)
-4. Site will be available at `https://username.github.io/repository-name`
+## Author
 
-**Netlify**
-1. Drag and drop project folder to Netlify
-2. Or connect GitHub repository for automatic deployments
-3. Configure form handling with Netlify Forms (optional)
-4. Site deployed instantly with custom domain options
-
-**Vercel**
-1. Import project from GitHub
-2. Zero-configuration deployment
-3. Automatic HTTPS and global CDN
-
-**Other Options**
-- Surge.sh: Simple command-line deployment
-- Firebase Hosting: Google's static hosting
-- AWS S3: Amazon's static website hosting
-
-### Form Backend Integration
-
-Since this is a static site, you'll need a backend service for actual user registration:
-
-- **Netlify Forms**: Built-in form handling with step consolidation
-- **Formspree**: Third-party form handling service
-- **Firebase**: User authentication and database
-- **Supabase**: Open-source Firebase alternative
-- **Custom API**: Integrate with your own backend service
-
-## Customization
-
-### Step Configuration
-- Modify step count in `js/step-manager.js`
-- Add or remove form fields for each step
-- Customize progress indicator styling
-- Update step validation rules
-
-### Form Fields
-- Edit form inputs in HTML files
-- Add new validation rules in `js/form-validation.js`
-- Customize placeholder text and labels
-- Implement conditional field logic
-
-### Styling
-- Update color scheme in CSS variables
-- Modify form layout and spacing
-- Customize button styles and hover effects
-- Adjust animation timing and effects
-
-### Step Logic
-- Configure step navigation rules
-- Implement data persistence between steps
-- Add custom validation for each step
-- Create conditional step flow
-
-## Step Management Examples
-
-### Basic Step Navigation
-```javascript
-// Example step management
-class StepManager {
-    constructor() {
-        this.currentStep = 1;
-        this.totalSteps = 3;
-        this.formData = {};
-    }
-    
-    nextStep() {
-        if (this.validateCurrentStep()) {
-            this.currentStep++;
-            this.updateUI();
-        }
-    }
-    
-    validateCurrentStep() {
-        // Add validation logic for current step
-        return true;
-    }
-}
-```
-
-### Form Data Persistence
-```javascript
-// Example data handling between steps
-function saveStepData(stepNumber, data) {
-    const formData = JSON.parse(localStorage.getItem('registrationData') || '{}');
-    formData[`step${stepNumber}`] = data;
-    localStorage.setItem('registrationData', JSON.stringify(formData));
-}
-```
-
-## Form Structure
-
-### Step 1: Basic Information
-- Name field with validation
-- Email field with format validation
-- Continue button with form validation
-
-### Step 2: Additional Details
-- (Customizable based on your needs)
-- Professional information, preferences, etc.
-
-### Step 3: Confirmation
-- Review collected information
-- Final submission
-- Terms and conditions acceptance
-
-## Browser Support
-
-- Chrome (latest)
-- Firefox (latest)
-- Safari (latest)
-- Edge (latest)
-- Mobile browsers (iOS Safari, Chrome Mobile)
-
-## Contributing
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/new-feature`)
-3. Commit changes (`git commit -am 'Add new feature'`)
-4. Push to branch (`git push origin feature/new-feature`)
-5. Create Pull Request
-
-### Development Guidelines
-- Follow semantic HTML structure for accessibility
-- Use consistent CSS naming conventions
-- Write clean, commented JavaScript
-- Test step navigation across different browsers
-- Ensure mobile responsiveness
-- Validate form data at each step
-- Implement proper error handling
-
-## License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
+**Pablo Nieto Pérez** — [wib.digital](https://wib.digital)
+GitHub: [@pabloWIB](https://github.com/pabloWIB)
 
 ---
 
-**Repository**: https://github.com/pabloWIB/Steps-Register.git
+## Hire me
 
-For questions or support, please open an issue on GitHub.
+I build **custom internal tools, CRMs and dashboards** for small teams, and
+**conversion-focused websites** for businesses.
+
+- [Custom internal tool, CRM or dashboard](https://www.fiverr.com/pablonietop/build-a-custom-internal-app-for-your-business) — from $45
+- [Conversion-focused website](https://www.fiverr.com/pablonietop/convert-your-landing-page-design-to-code) — from $80
+- [All my services on Fiverr](https://www.fiverr.com/pablonietop)
+- [wib.digital](https://wib.digital)

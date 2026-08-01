@@ -1,0 +1,174 @@
+/* ==========================================================================
+   layout.css — page shell, card, steps, progress, footer
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   Page
+   The two purple corner glows replace a 231 KB background bitmap. They are
+   the same colour and opacity that the bitmap was built from, so they scale
+   to any viewport instead of being cropped away on narrow screens.
+   -------------------------------------------------------------------------- */
+
+body {
+  min-height: 100vh;
+  min-height: 100svh;
+  display: grid;
+  align-content: center;
+  align-content: safe center;
+  justify-items: center;
+  padding: var(--space-32) var(--space-16);
+  background-color: var(--color-canvas);
+  background-image:
+    radial-gradient(45% 55% at 0% 0%, rgb(var(--color-glow) / 0.32), transparent 70%),
+    radial-gradient(45% 55% at 100% 100%, rgb(var(--color-glow) / 0.32), transparent 70%);
+  background-repeat: no-repeat;
+}
+
+.shell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-24);
+  width: 100%;
+  max-width: 30rem;
+}
+
+/* --------------------------------------------------------------------------
+   Card
+   -------------------------------------------------------------------------- */
+
+.card {
+  display: grid;
+  align-content: center;
+  width: 100%;
+  padding: var(--space-32) var(--space-24);
+  background-color: var(--color-surface);
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-lg);
+}
+
+/* --------------------------------------------------------------------------
+   Steps
+   -------------------------------------------------------------------------- */
+
+.step {
+  display: none;
+  gap: var(--space-32);
+}
+
+.step.is-active {
+  display: grid;
+  animation: step-in var(--transition) both;
+}
+
+.step__title:focus-visible {
+  outline-offset: 4px;
+}
+
+.step__body {
+  display: grid;
+  gap: var(--space-24);
+}
+
+.step__actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-16);
+}
+
+@keyframes step-in {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Progress
+   The dots are decorative: the label next to them carries the same
+   information as text, and it is the element screen readers announce.
+   -------------------------------------------------------------------------- */
+
+.stepper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-16);
+}
+
+.stepper__label {
+  font-size: var(--text-xs);
+  color: var(--color-text-dim);
+}
+
+.stepper__dots {
+  display: flex;
+  align-items: center;
+  gap: var(--space-8);
+}
+
+.stepper__dot {
+  display: grid;
+  place-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  transition: background-color var(--transition);
+}
+
+.stepper__dot::before {
+  content: "";
+  width: 12px;
+  height: 12px;
+  background-color: var(--color-surface-raised);
+  border-radius: 50%;
+  transition: background-color var(--transition);
+}
+
+.stepper__dot.is-done::before {
+  background-color: var(--color-accent);
+}
+
+.stepper__dot.is-current {
+  background-color: rgb(var(--color-glow) / 0.35);
+}
+
+.stepper__dot.is-current::before {
+  background-color: var(--color-accent);
+}
+
+/* --------------------------------------------------------------------------
+   Footer
+   -------------------------------------------------------------------------- */
+
+.site-footer {
+  font-size: var(--text-xs);
+  color: var(--color-text-dim);
+  text-align: center;
+  text-wrap: balance;
+}
+
+/* --------------------------------------------------------------------------
+   Media queries
+   -------------------------------------------------------------------------- */
+
+@media (min-width: 480px) {
+  .card {
+    padding: var(--space-48) var(--space-32);
+  }
+}
+
+/* A floor on the card height stops it resizing as the user moves between
+   steps — but only where there is vertical room for it, so a short window
+   (a phone held sideways) is not forced into a scroll it does not need. */
+@media (min-height: 36rem) {
+  .card {
+    min-height: 24rem;
+  }
+}

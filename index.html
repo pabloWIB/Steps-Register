@@ -1,117 +1,195 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" href="CSS/normalize.css">
-	<link rel="stylesheet" href="CSS/styles.css">
-	<link rel="stylesheet" href="CSS/fonts.css">
-	<link rel="icon" type="image/x-icon" href="Steps-Register.png">
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-beta1/jquery.slim.min.js"></script>
-	<title>STEPS</title>
-</head>
-<body>
-	<div class="width-adjust">
-		<main id="findMain" class="">
-			<form class="internal-width" id="firstForm">
-				<div>
-					<h2>Register</h2>
-				</div>
-				<div>
-					<div>
-						<div>
-							<label for="namef1">Name</label>
-						</div>
-						<input type="text" id="namef1" name="Name" placeholder="Enter your name" maxlength="35" autocomplete="on">
-					</div>
-					<div>
-						<div>
-							<label for="emailf1">Email</label>
-						</div>
-						<input type="email" id="emailf1" name="Email" placeholder="example@gmail.com" maxlength="35" autocomplete="on">
-						<div class="error-div-hide" id="findErrorsDiv">
-							<p id="errorMassage1"></p>
-							<p id="errorMassage2"></p>
-						</div>
-					</div>
-				</div>
-				<div class="gradient-input">
-					<input type="submit" value="Continue"></button>
-				</div>
-			</form>
-		</main>	
-		<section id="findSection">
-			<div class="internal-width">
-				<div>
-					<h3>Which topics are you interested in?</h3>
-				</div>
-				<form action="" id="secondForm">
-					<div>
-						<div>
-							<input type="checkbox" name="SoftwareDevelopment" id="softwareD" value="Software Development">
-							<label for="softwareD">Software Development</label>
-						</div>
-						<div>
-							<input type="checkbox" name="UserExperience" id="userE" value="User Experience">
-							<label for="userE">User Experience</label>
-						</div>
-						<div>
-							<input type="checkbox" name="GraphicDesign" id="graphicD" value="Graphic Design">
-							<label for="graphicD">Graphic Design</label>
-						</div>
-					</div>
-					<div class="gradient-input">
-						<input type="submit" value="Continue">
-					</div>
-				</form>
-			</div>
-		</section>
-		<footer id="findFooter">
-			<div class="internal-width">
-				<div>
-					<h2>Summary</h2>
-				</div>
-				<div>
-					<h3>Name: <span id="nameValue">Emely Johnson</span></h3>
-					<h3>Email: <span id="emailValue">emely@emelyjohnsonth.com</span></h3>
-				</div>
-				<div>
-					<div>
-						<h3>Topics: </h3>
-					</div>
-					<ul id="formOptions">
-						<li>User Experience</li>
-						<li>Graphic Design</li>
-					</ul>
-				</div>
-				<form class="gradient-input" id="thirdForm">
-					<input type="submit" value="Confirm"></button>
-				</form>
-			</div>
-		</footer>
-		<nav id="findNav">
-			<div>
-				<h3>Step <span id="formIndex"></span> of 3</h3>
-			</div>
-			<div>
-				
-				<div id="circle-select1" class="circle-no-select circle-select">
-					<div></div>
-				</div>
-				<div id="circle-select2" class="circle-no-select">
-					<div></div>
-				</div>
-				<div id="circle-select3" class="circle-no-select">
-					<div></div>
-				</div>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-			</div>
-			<div>
-				<h3>Step of</h3>
-			</div>
-		</nav>
-	</div>
-	<script src="JS/script.js">
-	</script>
+  <title>Steps Register — Three-step sign-up form in vanilla JS</title>
+  <meta name="description" content="A three-step registration form built with plain HTML, CSS and JavaScript. Enter your details, choose your topics, then review a summary before confirming.">
+  <link rel="canonical" href="https://stepsregister.wib.digital/">
+
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://stepsregister.wib.digital/">
+  <meta property="og:title" content="Steps Register — Three-step sign-up form in vanilla JS">
+  <meta property="og:description" content="A three-step registration form built with plain HTML, CSS and JavaScript. Enter your details, choose your topics, then review a summary before confirming.">
+  <meta property="og:image" content="https://stepsregister.wib.digital/assets/img/steps-register-preview.jpg">
+
+  <link rel="icon" href="assets/img/favicon.png" type="image/png">
+  <link rel="apple-touch-icon" href="assets/img/favicon.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap">
+
+  <link rel="stylesheet" href="assets/css/base.css">
+  <link rel="stylesheet" href="assets/css/layout.css">
+  <link rel="stylesheet" href="assets/css/components.css">
+
+  <script defer src="assets/js/main.js"></script>
+
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Pablo Nieto Pérez",
+      "url": "https://wib.digital",
+      "jobTitle": "Web Designer and Developer",
+      "sameAs": [
+        "https://www.fiverr.com/pablonietop",
+        "https://www.linkedin.com/in/pablo-nieto-perez-39a530292"
+      ]
+    }
+  </script>
+</head>
+
+<body>
+  <div class="shell">
+    <main class="card" id="card">
+      <h1 class="visually-hidden">Steps Register</h1>
+
+      <!-- Step 1 — details -->
+      <section class="step is-active" id="step-details" aria-labelledby="step-details-title">
+        <h2 class="step__title" id="step-details-title" tabindex="-1">Register</h2>
+
+        <form class="step__body" id="form-details" novalidate>
+          <div class="field">
+            <label class="field__label" for="name">Name</label>
+            <input class="field__input" type="text" id="name" name="name" placeholder="Enter your name" maxlength="35" autocomplete="name" aria-describedby="name-error">
+            <p class="field__error" id="name-error" role="alert" hidden></p>
+          </div>
+
+          <div class="field">
+            <label class="field__label" for="email">Email</label>
+            <input class="field__input" type="email" id="email" name="email" placeholder="you@example.com" maxlength="60" autocomplete="email" aria-describedby="email-error">
+            <p class="field__error" id="email-error" role="alert" hidden></p>
+          </div>
+
+          <div class="step__actions">
+            <button class="button button--primary" type="submit">
+              Continue
+              <svg class="button__icon" viewBox="0 -960 960 960" aria-hidden="true" focusable="false">
+                <path d="m561-242-43-42 168-168H160v-60h526L517-681l43-42 241 241-240 240Z"></path>
+              </svg>
+            </button>
+          </div>
+        </form>
+      </section>
+
+      <!-- Step 2 — topics -->
+      <section class="step" id="step-topics" aria-labelledby="step-topics-title">
+        <h2 class="step__title" id="step-topics-title" tabindex="-1">Which topics are you interested in?</h2>
+
+        <form class="step__body" id="form-topics" novalidate>
+          <div class="options" id="topics" role="group" aria-labelledby="step-topics-title" aria-describedby="topics-error">
+            <div class="option">
+              <input class="option__input visually-hidden" type="checkbox" id="topic-software" name="topics" value="Software Development">
+              <label class="option__label" for="topic-software">
+                <span class="option__text">Software Development</span>
+                <svg class="option__check" viewBox="0 -960 960 960" aria-hidden="true" focusable="false">
+                  <path d="M382-240 154-468l57-57 171 171 367-367 57 57-424 424Z"></path>
+                </svg>
+              </label>
+            </div>
+
+            <div class="option">
+              <input class="option__input visually-hidden" type="checkbox" id="topic-ux" name="topics" value="User Experience">
+              <label class="option__label" for="topic-ux">
+                <span class="option__text">User Experience</span>
+                <svg class="option__check" viewBox="0 -960 960 960" aria-hidden="true" focusable="false">
+                  <path d="M382-240 154-468l57-57 171 171 367-367 57 57-424 424Z"></path>
+                </svg>
+              </label>
+            </div>
+
+            <div class="option">
+              <input class="option__input visually-hidden" type="checkbox" id="topic-graphic" name="topics" value="Graphic Design">
+              <label class="option__label" for="topic-graphic">
+                <span class="option__text">Graphic Design</span>
+                <svg class="option__check" viewBox="0 -960 960 960" aria-hidden="true" focusable="false">
+                  <path d="M382-240 154-468l57-57 171 171 367-367 57 57-424 424Z"></path>
+                </svg>
+              </label>
+            </div>
+          </div>
+
+          <p class="field__error" id="topics-error" role="alert" hidden></p>
+
+          <div class="step__actions">
+            <button class="button button--ghost" type="button" data-back="step-details">Back</button>
+            <button class="button button--primary" type="submit">
+              Continue
+              <svg class="button__icon" viewBox="0 -960 960 960" aria-hidden="true" focusable="false">
+                <path d="m561-242-43-42 168-168H160v-60h526L517-681l43-42 241 241-240 240Z"></path>
+              </svg>
+            </button>
+          </div>
+        </form>
+      </section>
+
+      <!-- Step 3 — summary -->
+      <section class="step" id="step-summary" aria-labelledby="step-summary-title">
+        <h2 class="step__title" id="step-summary-title" tabindex="-1">Summary</h2>
+
+        <div class="step__body">
+          <dl class="summary">
+            <div class="summary__row">
+              <dt class="summary__term">Name</dt>
+              <dd class="summary__value" id="summary-name"></dd>
+            </div>
+
+            <div class="summary__row">
+              <dt class="summary__term">Email</dt>
+              <dd class="summary__value" id="summary-email"></dd>
+            </div>
+
+            <div class="summary__row">
+              <dt class="summary__term">Topics</dt>
+              <dd class="summary__value">
+                <ul class="summary__topics" id="summary-topics"></ul>
+              </dd>
+            </div>
+          </dl>
+
+          <div class="step__actions">
+            <button class="button button--ghost" type="button" data-back="step-topics">Back</button>
+            <button class="button button--primary" type="button" id="confirm">Confirm</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Step 4 — done -->
+      <section class="step" id="step-done" aria-labelledby="step-done-title">
+        <h2 class="step__title" id="step-done-title" tabindex="-1">Registration complete</h2>
+
+        <div class="step__body">
+          <p class="prose">
+            This is a front-end demo. There is no server behind the form, so nothing
+            was sent and nothing was stored — your answers only ever existed in this
+            browser tab, and reloading the page clears them.
+          </p>
+
+          <div class="step__actions">
+            <button class="button button--primary" type="button" id="restart">Start over</button>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <div class="stepper">
+      <p class="stepper__label" id="stepper-label" aria-live="polite">Step 1 of 3</p>
+      <ol class="stepper__dots" aria-hidden="true">
+        <li class="stepper__dot is-current"></li>
+        <li class="stepper__dot"></li>
+        <li class="stepper__dot"></li>
+      </ol>
+    </div>
+
+    <footer class="site-footer">
+      <p>
+        Built by <a href="https://wib.digital" rel="noopener">wib.digital</a> —
+        <a href="https://www.fiverr.com/pablonietop" rel="noopener">hire me on Fiverr</a>
+      </p>
+    </footer>
+  </div>
 </body>
 </html>

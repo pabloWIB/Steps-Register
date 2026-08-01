@@ -1,0 +1,22 @@
+# Operating system
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editors
+.vscode/
+.idea/
+*.sublime-workspace
+
+# Logs
+*.log
+
+# Environment
+.env
+.env.*
+
+# Tooling that has been used on this project in the past
+prepros.config
+prepros-6.config
+Prepros Export/
+node_modules/
